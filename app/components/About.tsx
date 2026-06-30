@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { AnimateIn } from "./AnimateIn";
 
 const credentials = [
@@ -16,29 +17,14 @@ export function About() {
           {/* Photo */}
           <AnimateIn y={28}>
             <div className="relative">
-              {/* Replace with:
-                  <Image
-                    src="/nayyer-about.jpg"
-                    alt="Nayyer Sultana with her training car in Mississauga"
-                    width={560}
-                    height={640}
-                    className="w-full rounded-2xl object-cover"
-                  />
-              */}
-              <div
-                className="w-full aspect-[7/8] rounded-2xl flex flex-col items-center justify-center gap-3"
-                style={{ background: "var(--surface)" }}
-              >
-                <div
-                  className="w-24 h-24 rounded-full flex items-center justify-center text-white font-display font-black text-3xl"
-                  style={{ background: "var(--primary-deep)" }}
-                  aria-hidden="true"
-                >
-                  N
-                </div>
-                <p className="text-muted text-sm font-body text-center px-8 leading-relaxed">
-                  Add a photo of Nayyer<br />with the training car here
-                </p>
+              <div className="relative w-full aspect-[7/8] rounded-2xl overflow-hidden">
+                <Image
+                  src="/instructor-photo.jpg"
+                  alt="Nayyer Sultana, MTO Certified driving instructor in Mississauga"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 560px"
+                />
               </div>
 
               {/* Floating credential badge */}

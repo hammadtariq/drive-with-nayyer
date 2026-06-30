@@ -2,21 +2,21 @@
 
 /* ── Design tokens ─────────────────────────────────────────── */
 :root {
-  /* Palette 1B: Pale Sky + Ink + Coral */
-  --primary:       oklch(0.94 0.035 230);
-  --primary-light: oklch(0.88 0.055 230);
-  --primary-deep:  oklch(0.24 0.055 245);
-  --primary-pale:  oklch(0.975 0.014 230);
-  --on-primary:    oklch(0.17 0.025 245);
-  --accent:        oklch(0.66 0.160 28);
-  --accent-deep:   oklch(0.54 0.170 28);
-  --ink:           oklch(0.17 0.025 245);
-  --muted:         oklch(0.42 0.020 245);
+  /* Palette 2: Aubergine + Rose */
+  --primary:       oklch(0.945 0.030 325);
+  --primary-light: oklch(0.885 0.055 325);
+  --primary-deep:  oklch(0.270 0.075 325);
+  --primary-pale:  oklch(0.978 0.012 325);
+  --on-primary:    oklch(0.180 0.030 325);
+  --accent:        oklch(0.630 0.145 10);
+  --accent-deep:   oklch(0.510 0.155 10);
+  --ink:           oklch(0.170 0.025 325);
+  --muted:         oklch(0.420 0.018 325);
   --bg:            oklch(1 0 0);
-  --surface:       oklch(0.985 0.006 245);
-  --surface-accent: oklch(0.94 0.035 230);
-  --shadow-primary: oklch(0.24 0.055 245 / 0.10);
-  --shadow-primary-strong: oklch(0.24 0.055 245 / 0.18);
+  --surface:       oklch(0.987 0.006 325);
+  --surface-accent: oklch(0.945 0.030 325);
+  --shadow-primary: oklch(0.270 0.075 325 / 0.10);
+  --shadow-primary-strong: oklch(0.270 0.075 325 / 0.18);
 }
 
 @theme inline {
@@ -79,6 +79,38 @@ body {
 [data-radix-accordion-content][data-state="closed"] {
   animation: accordion-up 0.2s cubic-bezier(0.4, 0, 1, 1);
   overflow: hidden;
+}
+
+/* ── Liquid glass ───────────────────────────────────────────── */
+.liquid-glass {
+  background: rgba(0, 0, 0, 0.4);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0.1) 80%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 /* ── Focus ring ─────────────────────────────────────────────── */

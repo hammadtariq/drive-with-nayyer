@@ -27,52 +27,57 @@ function CloseIcon() {
 }
 
 export function Nav() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 12);
+    const handler = () => setScrolled(window.scrollY > 80);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-sm shadow-[0_1px_0_var(--shadow-primary)]"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-6">
+    <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-12 lg:px-16 pt-4 sm:pt-6 transition-[padding] duration-300">
+      <div
+        className={`rounded-xl px-4 py-2.5 flex items-center justify-between gap-6 transition-all duration-300 ${
+          scrolled
+            ? "bg-white/95 backdrop-blur-sm shadow-[0_1px_0_var(--shadow-primary)]"
+            : "liquid-glass"
+        }`}
+      >
+
         {/* Logo */}
         <a href="#" className="flex items-center gap-2.5 shrink-0">
           <span
             className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-display font-black select-none transition-colors duration-300 ${
-              scrolled ? "bg-primary-deep text-white" : "bg-primary-deep text-white"
+              scrolled
+                ? "bg-primary-deep text-white"
+                : "bg-white/15 border border-white/20 text-white"
             }`}
             aria-hidden="true"
           >
             N
           </span>
           <span
-            className={`font-display font-semibold text-[15px] leading-tight transition-colors duration-300 ${
-              scrolled ? "text-ink" : "text-on-primary"
+            className={`font-display font-semibold text-sm leading-tight transition-colors duration-300 ${
+              scrolled ? "text-ink" : "text-white"
             }`}
           >
             Driving With<br />
-            <span className={scrolled ? "text-primary-deep" : "text-on-primary/70"}>Nayyer</span>
+            <span className={scrolled ? "text-primary-deep" : "text-white/60"}>Nayyer</span>
           </span>
         </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-7" aria-label="Main navigation">
+        {/* Desktop links */}
+        <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               className={`text-sm font-body font-semibold transition-colors duration-200 ${
-                scrolled ? "text-ink/70 hover:text-primary-deep" : "text-on-primary/75 hover:text-on-primary"
+                scrolled
+                  ? "text-ink/70 hover:text-primary-deep"
+                  : "text-white/70 hover:text-white"
               }`}
             >
               {link.label}
@@ -83,7 +88,11 @@ export function Nav() {
         {/* Desktop CTA */}
         <a
           href="#packages"
-          className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent text-ink font-display font-semibold text-sm hover:bg-accent-deep transition-colors duration-200"
+          className={`hidden md:inline-flex items-center px-6 py-2 rounded-lg font-display font-semibold text-sm transition-colors duration-200 ${
+            scrolled
+              ? "bg-accent text-ink hover:bg-accent-deep"
+              : "bg-white text-black hover:bg-white/90"
+          }`}
         >
           Book a Lesson
         </a>
@@ -93,7 +102,9 @@ export function Nav() {
           <Dialog.Trigger asChild>
             <button
               className={`md:hidden p-2 -mr-1 rounded-lg transition-colors ${
-                scrolled ? "text-ink hover:bg-primary-pale" : "text-on-primary hover:bg-white/60"
+                scrolled
+                  ? "text-ink hover:bg-primary-pale"
+                  : "text-white hover:bg-white/15"
               }`}
               aria-label="Open navigation menu"
             >
@@ -102,18 +113,18 @@ export function Nav() {
           </Dialog.Trigger>
 
           <Dialog.Portal>
-            <Dialog.Overlay className="fixed inset-0 bg-ink/30 backdrop-blur-sm z-50 md:hidden" />
+            <Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 md:hidden" />
             <Dialog.Content
-              className="fixed top-0 right-0 bottom-0 w-72 bg-white z-50 flex flex-col shadow-2xl md:hidden"
+              className="fixed top-0 right-0 bottom-0 w-72 bg-zinc-900/95 backdrop-blur-xl z-50 flex flex-col shadow-2xl md:hidden"
               aria-describedby={undefined}
             >
               <Dialog.Title className="sr-only">Navigation Menu</Dialog.Title>
 
-              <div className="flex items-center justify-between px-5 h-16 border-b border-surface">
-                <span className="font-display font-semibold text-ink text-sm">Menu</span>
+              <div className="flex items-center justify-between px-5 h-16 border-b border-white/10">
+                <span className="font-display font-semibold text-white text-sm">Menu</span>
                 <Dialog.Close asChild>
                   <button
-                    className="p-2 -mr-1 text-ink rounded-lg hover:bg-primary-pale transition-colors"
+                    className="p-2 -mr-1 text-white rounded-lg hover:bg-white/10 transition-colors"
                     aria-label="Close menu"
                   >
                     <CloseIcon />
@@ -126,7 +137,7 @@ export function Nav() {
                   <Dialog.Close asChild key={link.href}>
                     <a
                       href={link.href}
-                      className="px-4 py-3 rounded-xl font-body font-semibold text-ink hover:bg-primary-pale hover:text-primary-deep transition-colors duration-150"
+                      className="px-4 py-3 rounded-xl font-body font-semibold text-white/80 hover:bg-white/10 hover:text-white transition-colors duration-150"
                     >
                       {link.label}
                     </a>
@@ -134,11 +145,11 @@ export function Nav() {
                 ))}
               </nav>
 
-              <div className="p-5 border-t border-surface">
+              <div className="p-5 border-t border-white/10">
                 <Dialog.Close asChild>
                   <a
                     href="#packages"
-                    className="flex items-center justify-center w-full py-3.5 rounded-full bg-accent text-ink font-display font-semibold text-sm hover:bg-accent-deep transition-colors"
+                    className="flex items-center justify-center w-full py-3.5 rounded-lg bg-white text-black font-display font-semibold text-sm hover:bg-white/90 transition-colors"
                   >
                     Book a Lesson
                   </a>
@@ -147,6 +158,7 @@ export function Nav() {
             </Dialog.Content>
           </Dialog.Portal>
         </Dialog.Root>
+
       </div>
     </header>
   );
