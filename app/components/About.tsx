@@ -85,6 +85,7 @@ export function About() {
                 href="tel:+16477162153"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary/25 text-primary-deep font-display font-semibold text-sm hover:bg-primary-pale transition-colors duration-200"
               >
+                <PhoneIcon />
                 647-716-2153
               </a>
             </div>
@@ -109,6 +110,20 @@ function WhatsAppIcon() {
         stroke="currentColor"
         strokeWidth="1.4"
         strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function PhoneIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M5.2 2.4 6.5 5c.18.36.09.79-.22 1.05l-.9.76a7.8 7.8 0 0 0 3.8 3.8l.76-.9c.26-.31.69-.4 1.05-.22l2.61 1.3c.39.19.59.63.48 1.05l-.35 1.32c-.12.47-.55.79-1.03.76C6.92 13.52 2.48 9.08 2.08 3.3c-.03-.48.29-.91.76-1.03l1.32-.35c.42-.11.86.09 1.04.48Z"
+        stroke="currentColor"
+        strokeWidth="1.35"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

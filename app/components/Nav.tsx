@@ -26,6 +26,25 @@ function CloseIcon() {
   );
 }
 
+function LogoMark() {
+  return (
+    <svg width="28" height="41" viewBox="0 0 40 58" fill="none" aria-hidden="true">
+      <path
+        d="M4 56 L24 2"
+        stroke="oklch(0.510 0.155 10)"
+        strokeWidth="8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M16 56 L36 2"
+        stroke="oklch(0.510 0.155 10)"
+        strokeWidth="8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -47,24 +66,25 @@ export function Nav() {
       >
 
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2.5 shrink-0">
-          <span
-            className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-display font-black select-none transition-colors duration-300 ${
-              scrolled
-                ? "bg-primary-deep text-white"
-                : "bg-white/15 border border-white/20 text-white"
-            }`}
-            aria-hidden="true"
-          >
-            N
+        <a href="#" className="flex items-center gap-3 shrink-0" aria-label="Drive With Nayyer home">
+          <span className="flex h-10 w-8 items-center justify-center">
+            <LogoMark />
           </span>
-          <span
-            className={`font-display font-semibold text-sm leading-tight transition-colors duration-300 ${
-              scrolled ? "text-ink" : "text-white"
-            }`}
-          >
-            Driving With<br />
-            <span className={scrolled ? "text-primary-deep" : "text-white/60"}>Nayyer</span>
+          <span className="flex flex-col justify-center leading-none">
+            <span
+              className={`font-body text-[0.58rem] uppercase tracking-[0.38em] transition-colors duration-300 ${
+                scrolled ? "text-ink/45" : "text-white/60"
+              }`}
+            >
+              Drive With
+            </span>
+            <span
+              className={`mt-1 font-display text-[1.05rem] font-black uppercase tracking-[0.18em] transition-colors duration-300 ${
+                scrolled ? "text-ink" : "text-white"
+              }`}
+            >
+              Nayyer
+            </span>
           </span>
         </a>
 

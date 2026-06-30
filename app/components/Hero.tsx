@@ -97,8 +97,9 @@ export function Hero() {
                 href="https://wa.me/16477162153"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="liquid-glass inline-flex items-center border border-white/25 text-white px-7 py-3.5 rounded-full font-display font-semibold text-sm hover:bg-white/15 transition-colors duration-200"
+                className="liquid-glass inline-flex items-center gap-2.5 border border-white/25 text-white px-7 py-3.5 rounded-full font-display font-semibold text-sm hover:bg-white/15 transition-colors duration-200"
               >
+                <WhatsAppIcon />
                 WhatsApp Nayyer
               </a>
             </FadeIn>
@@ -119,5 +120,24 @@ export function Hero() {
         </div>
       </div>
     </section>
+  );
+}
+
+function WhatsAppIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M8 1.5A6.5 6.5 0 0 0 2.08 10.9L1.5 14.5l3.72-.57A6.5 6.5 0 1 0 8 1.5Z"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5.5 6.25c.1.5.45 1.5 1.5 2.5s2 1.4 2.5 1.5"
+        stroke="currentColor"
+        strokeWidth="1.4"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
