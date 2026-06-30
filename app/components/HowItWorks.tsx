@@ -24,7 +24,7 @@ export function HowItWorks() {
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <AnimateIn>
           <h2
-            className="font-display font-bold text-white tracking-[-0.015em] text-wrap-balance text-center mb-16"
+            className="font-display font-bold text-on-primary tracking-[-0.015em] text-wrap-balance text-center mb-16"
             style={{ fontSize: "clamp(1.75rem, 4vw, 2.5rem)" }}
           >
             How it works
@@ -45,17 +45,17 @@ export function HowItWorks() {
                 {/* Number circle */}
                 <div
                   className="relative z-10 w-[4.5rem] h-[4.5rem] rounded-full flex items-center justify-center mb-6 flex-shrink-0"
-                  style={{ background: "oklch(0.32 0.12 200)" }}
+                  style={{ background: "var(--primary-deep)" }}
                 >
                   <span className="font-display font-black text-white text-2xl leading-none">
                     {step.n}
                   </span>
                 </div>
 
-                <h3 className="font-display font-bold text-white text-lg leading-snug mb-3">
+                <h3 className="font-display font-bold text-on-primary text-lg leading-snug mb-3">
                   {step.heading}
                 </h3>
-                <p className="font-body text-white/65 text-sm leading-relaxed max-w-[220px] mx-auto">
+                <p className="font-body text-on-primary/70 text-sm leading-relaxed max-w-[220px] mx-auto">
                   {step.body}
                 </p>
 

@@ -27,12 +27,12 @@ export function Footer() {
         <div className="max-w-4xl mx-auto px-5 sm:px-8 text-center">
           <AnimateIn>
             <h2
-              className="font-display font-black text-white tracking-[-0.025em] text-wrap-balance"
+              className="font-display font-black text-on-primary tracking-[-0.025em] text-wrap-balance"
               style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
             >
               Ready to start driving?
             </h2>
-            <p className="mt-4 font-body text-white/70 max-w-md mx-auto" style={{ fontSize: "1.0625rem" }}>
+            <p className="mt-4 font-body text-on-primary/75 max-w-md mx-auto" style={{ fontSize: "1.0625rem" }}>
               Book your first lesson online. Pay securely through Stripe — your slot is confirmed once payment goes through.
             </p>
           </AnimateIn>
@@ -49,7 +49,7 @@ export function Footer() {
                 href="https://wa.me/16477162153"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full border border-white/25 text-white font-display font-semibold text-base hover:bg-white/10 transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full border border-on-primary/25 text-on-primary font-display font-semibold text-base hover:bg-white/60 transition-colors duration-200"
               >
                 <WhatsAppIcon />
                 Ask on WhatsApp
@@ -58,11 +58,11 @@ export function Footer() {
           </AnimateIn>
 
           <AnimateIn delay={0.18}>
-            <div className="mt-14 flex flex-wrap justify-center gap-6 text-white/50 font-body text-sm">
-              <a href="tel:+16477162153" className="hover:text-white transition-colors">
+            <div className="mt-14 flex flex-wrap justify-center gap-6 text-on-primary/60 font-body text-sm">
+              <a href="tel:+16477162153" className="hover:text-on-primary transition-colors">
                 647-716-2153
               </a>
-              <a href="mailto:kooolnayyer12@gmail.com" className="hover:text-white transition-colors">
+              <a href="mailto:kooolnayyer12@gmail.com" className="hover:text-on-primary transition-colors">
                 kooolnayyer12@gmail.com
               </a>
               <span>Mississauga, Ontario</span>

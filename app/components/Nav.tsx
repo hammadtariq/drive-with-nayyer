@@ -40,7 +40,7 @@ export function Nav() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-sm shadow-[0_1px_0_oklch(0.38_0.15_200/0.08)]"
+          ? "bg-white/95 backdrop-blur-sm shadow-[0_1px_0_var(--shadow-primary)]"
           : "bg-transparent"
       }`}
     >
@@ -48,14 +48,20 @@ export function Nav() {
         {/* Logo */}
         <a href="#" className="flex items-center gap-2.5 shrink-0">
           <span
-            className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white text-xs font-display font-black select-none"
+            className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-display font-black select-none transition-colors duration-300 ${
+              scrolled ? "bg-primary-deep text-white" : "bg-primary-deep text-white"
+            }`}
             aria-hidden="true"
           >
             N
           </span>
-          <span className="font-display font-semibold text-ink text-[15px] leading-tight">
+          <span
+            className={`font-display font-semibold text-[15px] leading-tight transition-colors duration-300 ${
+              scrolled ? "text-ink" : "text-on-primary"
+            }`}
+          >
             Driving With<br />
-            <span className="text-primary">Nayyer</span>
+            <span className={scrolled ? "text-primary-deep" : "text-on-primary/70"}>Nayyer</span>
           </span>
         </a>
 
@@ -65,7 +71,9 @@ export function Nav() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-body font-semibold text-ink/70 hover:text-primary transition-colors duration-200"
+              className={`text-sm font-body font-semibold transition-colors duration-200 ${
+                scrolled ? "text-ink/70 hover:text-primary-deep" : "text-on-primary/75 hover:text-on-primary"
+              }`}
             >
               {link.label}
             </a>
@@ -84,7 +92,9 @@ export function Nav() {
         <Dialog.Root open={open} onOpenChange={setOpen}>
           <Dialog.Trigger asChild>
             <button
-              className="md:hidden p-2 -mr-1 text-ink rounded-lg hover:bg-primary-pale transition-colors"
+              className={`md:hidden p-2 -mr-1 rounded-lg transition-colors ${
+                scrolled ? "text-ink hover:bg-primary-pale" : "text-on-primary hover:bg-white/60"
+              }`}
               aria-label="Open navigation menu"
             >
               <MenuIcon />
@@ -116,7 +126,7 @@ export function Nav() {
                   <Dialog.Close asChild key={link.href}>
                     <a
                       href={link.href}
-                      className="px-4 py-3 rounded-xl font-body font-semibold text-ink hover:bg-primary-pale hover:text-primary transition-colors duration-150"
+                      className="px-4 py-3 rounded-xl font-body font-semibold text-ink hover:bg-primary-pale hover:text-primary-deep transition-colors duration-150"
                     >
                       {link.label}
                     </a>

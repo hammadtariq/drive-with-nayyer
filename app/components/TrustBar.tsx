@@ -33,7 +33,7 @@ export function TrustBar() {
           <div
             key={s}
             role="listitem"
-            className="flex-none snap-start inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary-pale text-primary text-sm font-body font-semibold whitespace-nowrap"
+            className="flex-none snap-start inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary-pale text-primary-deep text-sm font-body font-semibold whitespace-nowrap"
           >
             <Check />
             {s}

@@ -53,14 +53,14 @@ export function Testimonials() {
                 </blockquote>
                 <figcaption className="mt-5 flex items-center gap-3">
                   <span
-                    className="w-9 h-9 rounded-full bg-primary flex items-center justify-center text-white font-display font-bold text-sm flex-shrink-0"
+                    className="w-9 h-9 rounded-full bg-primary-deep flex items-center justify-center text-white font-display font-bold text-sm flex-shrink-0"
                     aria-hidden="true"
                   >
                     {t.name[0]}
                   </span>
                   <div>
                     <p className="font-body font-semibold text-ink text-sm">{t.name}</p>
-                    <p className="font-body text-primary text-xs font-semibold mt-0.5">
+                    <p className="font-body text-primary-deep text-xs font-semibold mt-0.5">
                       {t.result}
                     </p>
                   </div>

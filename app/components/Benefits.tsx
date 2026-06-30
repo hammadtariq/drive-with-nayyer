@@ -52,7 +52,7 @@ export function Benefits() {
     <section className="py-20 md:py-28 bg-bg">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <AnimateIn>
-          <p className="text-primary font-body font-semibold text-sm mb-3">Why learn with Nayyer</p>
+          <p className="text-primary-deep font-body font-semibold text-sm mb-3">Why learn with Nayyer</p>
           <h2
             className="font-display font-bold text-ink tracking-[-0.015em] text-wrap-balance max-w-xl"
             style={{ fontSize: "clamp(1.75rem, 4vw, 2.5rem)" }}
@@ -65,12 +65,12 @@ export function Benefits() {
           {/* Large primary benefit */}
           <AnimateIn delay={0.08} y={24}>
             <div className="bg-primary rounded-2xl p-8 md:p-10 flex flex-col justify-between min-h-[280px] md:row-span-2 h-full">
-              <div className="text-white/60 mb-6">{primary.icon}</div>
+              <div className="text-on-primary/60 mb-6">{primary.icon}</div>
               <div>
-                <h3 className="font-display font-bold text-white text-xl leading-snug">
+                <h3 className="font-display font-bold text-on-primary text-xl leading-snug">
                   {primary.heading}
                 </h3>
-                <p className="mt-3 font-body text-white/75 leading-relaxed text-sm">
+                <p className="mt-3 font-body text-on-primary/75 leading-relaxed text-sm">
                   {primary.body}
                 </p>
               </div>
@@ -81,7 +81,7 @@ export function Benefits() {
           {supporting.map((b, i) => (
             <AnimateIn key={b.heading} delay={0.14 + i * 0.07} y={20}>
               <div className="bg-surface rounded-2xl p-6 flex gap-4 items-start">
-                <div className="text-primary flex-shrink-0 mt-0.5">{b.icon}</div>
+                <div className="text-primary-deep flex-shrink-0 mt-0.5">{b.icon}</div>
                 <div>
                   <h3 className="font-display font-semibold text-ink text-base leading-snug">
                     {b.heading}

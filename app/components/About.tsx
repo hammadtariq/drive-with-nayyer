@@ -31,7 +31,7 @@ export function About() {
               >
                 <div
                   className="w-24 h-24 rounded-full flex items-center justify-center text-white font-display font-black text-3xl"
-                  style={{ background: "var(--primary)" }}
+                  style={{ background: "var(--primary-deep)" }}
                   aria-hidden="true"
                 >
                   N
@@ -51,7 +51,7 @@ export function About() {
 
           {/* Text */}
           <AnimateIn delay={0.1} y={24}>
-            <p className="text-primary font-body font-semibold text-sm mb-3">
+            <p className="text-primary-deep font-body font-semibold text-sm mb-3">
               Meet your instructor
             </p>
             <h2
@@ -75,7 +75,7 @@ export function About() {
             <ul className="mt-8 space-y-3" aria-label="Credentials">
               {credentials.map((c) => (
                 <li key={c} className="flex items-start gap-3 font-body text-ink/80 text-sm">
-                  <span className="mt-0.5 w-5 h-5 rounded-full bg-primary-pale text-primary shrink-0 flex items-center justify-center">
+                  <span className="mt-0.5 w-5 h-5 rounded-full bg-primary-pale text-primary-deep shrink-0 flex items-center justify-center">
                     <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
                       <path d="M2 5.5l2.5 2.5 4.5-5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -90,14 +90,14 @@ export function About() {
                 href="https://wa.me/16477162153"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-primary text-white font-display font-semibold text-sm hover:bg-primary-light transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-primary-deep text-white font-display font-semibold text-sm hover:bg-primary-light transition-colors duration-200"
               >
                 <WhatsAppIcon />
                 Message on WhatsApp
               </a>
               <a
                 href="tel:+16477162153"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary/25 text-primary font-display font-semibold text-sm hover:bg-primary-pale transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary/25 text-primary-deep font-display font-semibold text-sm hover:bg-primary-pale transition-colors duration-200"
               >
                 647-716-2153
               </a>

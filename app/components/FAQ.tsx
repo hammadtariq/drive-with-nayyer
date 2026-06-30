@@ -84,7 +84,7 @@ export function FAQ() {
                 value={faq.id}
                 className="group border border-primary/12 rounded-xl overflow-hidden bg-bg hover:border-primary/25 transition-colors duration-200"
               >
-                <Accordion.Trigger className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left font-display font-semibold text-ink text-[0.9375rem] hover:text-primary transition-colors duration-150">
+                <Accordion.Trigger className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left font-display font-semibold text-ink text-[0.9375rem] hover:text-primary-deep transition-colors duration-150">
                   {faq.question}
                   <ChevronIcon />
                 </Accordion.Trigger>
@@ -107,7 +107,7 @@ export function FAQ() {
               href="https://wa.me/16477162153"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary font-semibold hover:underline"
+              className="text-primary-deep font-semibold hover:underline"
             >
               Message Nayyer on WhatsApp
             </a>

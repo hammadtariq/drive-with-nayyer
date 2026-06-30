@@ -35,14 +35,14 @@ export function Hero() {
         {/* Text column */}
         <div className="max-w-2xl">
           <motion.p
-            className="font-body text-white/60 text-sm font-semibold tracking-wide mb-5"
+            className="font-body text-on-primary/70 text-sm font-semibold tracking-wide mb-5"
             {...item(0, shouldReduce)}
           >
             Mississauga, Ontario · Women-only instruction
           </motion.p>
 
           <motion.h1
-            className="font-display font-black text-white leading-[1.04] text-wrap-balance"
+            className="font-display font-black text-on-primary leading-[1.04] text-wrap-balance"
             style={{ fontSize: "clamp(2.5rem, 6vw, 4.25rem)", letterSpacing: "-0.025em" }}
             {...item(1, shouldReduce)}
           >
@@ -50,7 +50,7 @@ export function Hero() {
           </motion.h1>
 
           <motion.p
-            className="mt-6 font-body text-white/80 leading-relaxed max-w-xl"
+            className="mt-6 font-body text-on-primary/80 leading-relaxed max-w-xl"
             style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
             {...item(2, shouldReduce)}
           >
@@ -67,7 +67,7 @@ export function Hero() {
             {badges.map((b) => (
               <span
                 key={b}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-white/25 text-white/90 text-sm font-body font-semibold"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-on-primary/15 bg-white/55 text-on-primary text-sm font-body font-semibold"
               >
                 <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
                   <path d="M2.5 6.5l3 3 5-6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
@@ -95,7 +95,7 @@ export function Hero() {
               href="https://wa.me/16477162153"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/30 text-white font-display font-semibold text-sm hover:bg-white/10 transition-colors duration-200"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-on-primary/25 text-on-primary font-display font-semibold text-sm hover:bg-white/60 transition-colors duration-200"
             >
               WhatsApp Nayyer
             </a>
@@ -109,7 +109,7 @@ export function Hero() {
         >
           <div
             className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden flex items-center justify-center"
-            style={{ background: "oklch(0.32 0.12 200)" }}
+            style={{ background: "var(--primary-deep)" }}
           >
             {/* Replace with:
                 <Image
@@ -120,12 +120,12 @@ export function Hero() {
                   priority
                 />
             */}
-            <div className="text-center text-white/40 text-sm px-8 leading-relaxed select-none">
+            <div className="text-center text-white/55 text-sm px-8 leading-relaxed select-none">
               Instructor photo<br />
               <span className="font-display font-semibold">Nayyer Sultana</span>
             </div>
           </div>
-          <p className="text-white/50 text-xs font-body text-center">
+          <p className="text-on-primary/55 text-xs font-body text-center">
             MTO Certified Instructor
           </p>
         </motion.div>
@@ -133,7 +133,7 @@ export function Hero() {
 
       {/* Scroll cue */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-on-primary/40"
         {...item(6, shouldReduce)}
       >
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">

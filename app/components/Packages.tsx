@@ -65,7 +65,7 @@ function CheckIcon({ featured }: { featured: boolean }) {
     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
       <path
         d="M2.5 6.5l3 3 5-6"
-        stroke={featured ? "oklch(0.72 0.14 75)" : "currentColor"}
+        stroke={featured ? "var(--accent)" : "currentColor"}
         strokeWidth="1.75"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -98,8 +98,8 @@ export function Packages() {
               <article
                 className={`relative flex flex-col h-full rounded-2xl border transition-shadow duration-300 ${
                   pkg.featured
-                    ? "bg-primary border-primary shadow-[0_16px_48px_oklch(0.38_0.15_200_/_0.22)] md:-mt-4 md:pb-4"
-                    : "bg-bg border-primary/15 hover:shadow-[0_8px_32px_oklch(0.38_0.15_200_/_0.10)]"
+                    ? "bg-primary border-primary shadow-[0_16px_48px_var(--shadow-primary-strong)] md:-mt-4 md:pb-4"
+                    : "bg-bg border-primary/15 hover:shadow-[0_8px_32px_var(--shadow-primary)]"
                 }`}
               >
                 {pkg.featured && (
@@ -115,7 +115,7 @@ export function Packages() {
                   <div className="mb-6">
                     <span
                       className={`font-display font-black text-5xl leading-none tabular-nums ${
-                        pkg.featured ? "text-white/20" : "text-primary/15"
+                        pkg.featured ? "text-on-primary/20" : "text-primary-deep/15"
                       }`}
                       aria-hidden="true"
                     >
@@ -123,14 +123,14 @@ export function Packages() {
                     </span>
                     <h3
                       className={`mt-2 font-display font-bold text-xl leading-snug ${
-                        pkg.featured ? "text-white" : "text-ink"
+                        pkg.featured ? "text-on-primary" : "text-ink"
                       }`}
                     >
                       {pkg.name}
                     </h3>
                     <p
                       className={`mt-1 font-body text-sm leading-snug ${
-                        pkg.featured ? "text-white/70" : "text-muted"
+                        pkg.featured ? "text-on-primary/70" : "text-muted"
                       }`}
                     >
                       {pkg.tagline}
@@ -148,7 +148,7 @@ export function Packages() {
                     </p>
                     <p
                       className={`mt-1 font-body text-xs ${
-                        pkg.featured ? "text-white/50" : "text-muted"
+                        pkg.featured ? "text-on-primary/55" : "text-muted"
                       }`}
                     >
                       {pkg.note}
@@ -161,7 +161,7 @@ export function Packages() {
                       <li
                         key={item}
                         className={`flex items-start gap-2.5 font-body text-sm leading-snug ${
-                          pkg.featured ? "text-white/85" : "text-ink/80"
+                          pkg.featured ? "text-on-primary/85" : "text-ink/80"
                         }`}
                       >
                         <span className="mt-0.5 flex-shrink-0">
@@ -178,7 +178,7 @@ export function Packages() {
                     className={`block w-full text-center py-3.5 rounded-xl font-display font-semibold text-sm transition-colors duration-200 ${
                       pkg.featured
                         ? "bg-accent text-ink hover:bg-accent-deep"
-                        : "bg-primary-pale text-primary hover:bg-primary hover:text-white border border-primary/20"
+                        : "bg-primary-pale text-primary-deep hover:bg-primary-deep hover:text-white border border-primary/20"
                     }`}
                   >
                     Book {pkg.name}
@@ -196,7 +196,7 @@ export function Packages() {
               href="https://wa.me/16477162153"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary font-semibold hover:underline"
+              className="text-primary-deep font-semibold hover:underline"
             >
               Message Nayyer on WhatsApp
             </a>{" "}

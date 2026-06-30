@@ -2,25 +2,40 @@
 
 /* ── Design tokens ─────────────────────────────────────────── */
 :root {
-  --bg-main:     #0A0A0A;
-  --bg-card:     #141414;
-  --bg-elevated: #1C1C1C;
-  --bg-footer:   #050505;
-  --gold:        #D4AF37;
-  --ink:         #F5F0E8;
+  /* Palette 1B: Pale Sky + Ink + Coral */
+  --primary:       oklch(0.94 0.035 230);
+  --primary-light: oklch(0.88 0.055 230);
+  --primary-deep:  oklch(0.24 0.055 245);
+  --primary-pale:  oklch(0.975 0.014 230);
+  --on-primary:    oklch(0.17 0.025 245);
+  --accent:        oklch(0.66 0.160 28);
+  --accent-deep:   oklch(0.54 0.170 28);
+  --ink:           oklch(0.17 0.025 245);
+  --muted:         oklch(0.42 0.020 245);
+  --bg:            oklch(1 0 0);
+  --surface:       oklch(0.985 0.006 245);
+  --surface-accent: oklch(0.94 0.035 230);
+  --shadow-primary: oklch(0.24 0.055 245 / 0.10);
+  --shadow-primary-strong: oklch(0.24 0.055 245 / 0.18);
 }
 
 @theme inline {
-  --color-bg-main:     var(--bg-main);
-  --color-bg-card:     var(--bg-card);
-  --color-bg-elevated: var(--bg-elevated);
-  --color-bg-footer:   var(--bg-footer);
-  --color-gold:        var(--gold);
-  --color-ink:         var(--ink);
+  --color-primary:       var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-deep:  var(--primary-deep);
+  --color-primary-pale:  var(--primary-pale);
+  --color-on-primary:    var(--on-primary);
+  --color-accent:        var(--accent);
+  --color-accent-deep:   var(--accent-deep);
+  --color-ink:           var(--ink);
+  --color-muted:         var(--muted);
+  --color-bg:            var(--bg);
+  --color-surface:       var(--surface);
+  --color-surface-accent: var(--surface-accent);
 
-  --font-display: var(--font-cormorant);
-  --font-body:    var(--font-dmsans);
-  --font-sans:    var(--font-dmsans);
+  --font-display: var(--font-jost);
+  --font-body:    var(--font-nunito);
+  --font-sans:    var(--font-nunito);
 }
 
 /* ── Base ───────────────────────────────────────────────────── */
@@ -31,9 +46,9 @@
 }
 
 body {
-  background: var(--bg-main);
+  background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-dmsans), system-ui, sans-serif;
+  font-family: var(--font-nunito), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -68,12 +83,12 @@ body {
 
 /* ── Focus ring ─────────────────────────────────────────────── */
 :focus-visible {
-  outline: 1px solid var(--gold);
+  outline: 2px solid var(--accent-deep);
   outline-offset: 3px;
 }
 
 /* ── Selection ──────────────────────────────────────────────── */
 ::selection {
-  background: rgba(212, 175, 55, 0.2);
+  background: color-mix(in oklab, var(--accent) 28%, transparent);
   color: var(--ink);
 }
