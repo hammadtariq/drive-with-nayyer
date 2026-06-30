@@ -4,17 +4,17 @@ const steps = [
   {
     n: "1",
     heading: "Choose your package",
-    body: "Browse the three packages and pick the one that matches your licence goal — G2 starter, G2 with road test support, or full G course.",
+    body: "Pick the option that fits your next step — BDE program, hourly driving lessons, or a road test vehicle booking.",
   },
   {
     n: "2",
-    heading: "Book your first slot & pay",
-    body: "Select an available first lesson time through Cal.com and complete payment through Stripe. Your slot is confirmed only after payment — no unpaid holds.",
+    heading: "Book your slot & pay",
+    body: "Choose a time through the booking flow and complete payment securely. Your booking is confirmed once payment goes through.",
   },
   {
     n: "3",
-    heading: "Complete your lessons",
-    body: "After your first paid lesson, Nayyer coordinates the remaining lessons with you directly — usually via WhatsApp — around your schedule.",
+    heading: "Coordinate with Nayyer",
+    body: "Nayyer confirms lesson details, pickup coverage, and any remaining scheduling directly with you — usually through WhatsApp.",
   },
 ];
 

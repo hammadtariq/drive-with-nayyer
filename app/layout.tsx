@@ -16,9 +16,10 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "Driving With Nayyer — Women-Only Driving Lessons in Mississauga",
+  title:
+    "Drive With Nayyer — Women-Only Driving Lessons in Ontario, Canada",
   description:
-    "Learn to drive with Nayyer Sultana, MTO Certified Instructor. Women-only G2 and G training in Mississauga. Lessons in English, Urdu, and Hindi. Pickup and drop-off available.",
+    "Learn to drive in Ontario, Canada with Nayyer Sultana, MTO Certified Instructor. Women-only G2 and G training in Mississauga, Oakville, Burlington, and Milton. Lessons in English, Urdu, and Hindi.",
 };
 
 export default function RootLayout({

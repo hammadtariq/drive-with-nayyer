@@ -24,7 +24,7 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="py-20 md:py-28 bg-surface-accent">
+    <section className="py-20 md:py-28 bg-surface">
       <div className="max-w-5xl mx-auto px-5 sm:px-8">
         <AnimateIn>
           <h2

@@ -1,11 +1,11 @@
 <!-- SEED: re-run /impeccable document once there's code to capture the actual tokens and components. -->
 
 ---
-name: Driving With Nayyer
-description: Women-only driving lessons in Mississauga — MTO Certified, G2 and G training, three languages.
+name: Drive With Nayyer
+description: Women-only driving lessons in Ontario, Canada — MTO Certified, G2 and G training in Mississauga, Oakville, Burlington, and Milton.
 ---
 
-# Design System: Driving With Nayyer
+# Design System: Drive With Nayyer
 
 ## 1. Overview
 

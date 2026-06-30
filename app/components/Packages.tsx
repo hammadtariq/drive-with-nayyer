@@ -11,52 +11,57 @@ const packages = [
   {
     id: "pkg01",
     number: "01",
-    name: "G2 Starter",
-    tagline: "Everything you need to earn your G2.",
-    price: "TBD",
-    note: "Pricing confirmed on booking",
+    name: "Beginner Driver's Education",
+    tagline: "I am just getting started.",
+    price: "$494",
+    note: "BDE Program · Terms and conditions apply",
     inclusions: [
-      "BDE certificate (Beginner Driver Education)",
-      "10 in-car lessons with Nayyer",
-      "G2 road test preparation",
-      "Flexible scheduling",
+      "MTO-approved BDE course",
+      "20 hours of online theory, self-paced",
+      "10 hours of online homework, self-paced",
+      "10 hours of one-on-one car instruction",
+      "May help you get your G2 four months earlier",
+      "May qualify you for a 10-25% auto insurance discount",
     ],
     href: CAL_URLS.pkg01,
-    featured: false,
+    featured: true,
+    cta: "Get your licence faster",
   },
   {
     id: "pkg02",
     number: "02",
-    name: "G2 Complete",
-    tagline: "Lessons plus full road test support.",
-    price: "TBD",
-    note: "Pricing confirmed on booking",
+    name: "Hourly Driving Lessons",
+    tagline: "I have my G1 and want to book driving lessons.",
+    price: "$52/hr",
+    note: "Terms and conditions apply",
     inclusions: [
-      "10 in-car lessons with Nayyer",
-      "Training car for your road test",
-      "Road test pickup and drop-off",
-      "Warm-up practice before the test",
-      "G2 road test preparation",
+      "One-on-one lessons with Nayyer",
+      "G2 and G road readiness support",
+      "Book, cancel, and reschedule by contacting Nayyer",
+      "Lessons available in English, Urdu, and Hindi",
+      "Booking required at least 24 hours ahead",
     ],
     href: CAL_URLS.pkg02,
-    featured: true,
+    featured: false,
+    cta: "Pick your hours",
   },
   {
     id: "pkg03",
     number: "03",
-    name: "G Full Course",
-    tagline: "Maximum preparation for your G licence.",
-    price: "TBD",
-    note: "Pricing confirmed on booking",
+    name: "Road Test Vehicle",
+    tagline: "I have my road test coming up.",
+    price: "$170-$220",
+    note: "Terms and conditions apply",
     inclusions: [
-      "15 in-car lessons with Nayyer",
-      "Training car for your road test",
-      "Road test pickup and drop-off",
-      "Warm-up practice before the test",
-      "G road test preparation",
+      "Use Nayyer's training vehicle for your G2 or G road test",
+      "Pickup and drop-off included",
+      "45-60 minute warm-up before the exam",
+      "Car use during the road test",
+      "Booking required at least 2 days ahead",
     ],
     href: CAL_URLS.pkg03,
     featured: false,
+    cta: "Book your vehicle",
   },
 ];
 
@@ -87,7 +92,7 @@ export function Packages() {
               Choose your package
             </h2>
             <p className="mt-3 font-body text-muted max-w-md mx-auto" style={{ fontSize: "1.0625rem" }}>
-              Three packages for every stage of your licensing journey. All include one-on-one instruction with Nayyer.
+              Pick the option that matches where you are now: start with BDE, book hourly lessons, or reserve a vehicle for road test day.
             </p>
           </div>
         </AnimateIn>
@@ -181,7 +186,7 @@ export function Packages() {
                         : "bg-primary-pale text-primary-deep hover:bg-primary-deep hover:text-white border border-primary/20"
                     }`}
                   >
-                    Book {pkg.name}
+                    {pkg.cta}
                   </a>
                 </div>
               </article>

@@ -39,12 +39,12 @@ export function Hero() {
             <FadeIn delay={0} duration={800}>
               <p className="font-body text-white/65 text-sm font-semibold tracking-wide mb-5"
                 style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}>
-                Mississauga, Ontario · Women-only instruction
+                Ontario, Canada · Women-only instruction
               </p>
             </FadeIn>
 
             <AnimatedHeading
-              text={"Women-only driving\nlessons in Mississauga."}
+              text={"Women-only driving\nlessons in Ontario, Canada."}
               className="text-white font-display font-light mb-5"
               style={{
                 fontSize: "clamp(2.5rem, 5.5vw, 4.25rem)",
@@ -77,9 +77,9 @@ export function Hero() {
                 className="text-base md:text-lg text-white/85 mb-6 max-w-lg"
                 style={{ textShadow: "0 1px 10px rgba(0,0,0,0.5)" }}
               >
-                Learn with Nayyer Sultana, MTO Certified Instructor — G2 and G
-                training in English, Urdu, and Hindi. Pickup and drop-off available
-                in selected Mississauga areas.
+                Learn with Nayyer Sultana, MTO Certified Instructor. G2 and G
+                lessons are available in Mississauga, Oakville, Burlington, and
+                Milton. Message to confirm other nearby areas.
               </p>
             </FadeIn>
 
@@ -111,7 +111,7 @@ export function Hero() {
                 className="text-lg md:text-xl lg:text-2xl text-white font-display font-light"
                 style={{ textShadow: "0 1px 8px rgba(0,0,0,0.4)" }}
               >
-                G2. G Licence. Mississauga.
+                Mississauga. Oakville. Burlington. Milton.
               </p>
             </div>
           </FadeIn>

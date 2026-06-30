@@ -3,8 +3,8 @@ const signals = [
   "MTO Certified Instructor",
   "G2 & G Training",
   "English · Urdu · Hindi",
-  "Pickup & Drop-off",
-  "Mississauga, Ontario",
+  "Ontario, Canada",
+  "Mississauga · Oakville · Burlington · Milton",
 ];
 
 function Check() {

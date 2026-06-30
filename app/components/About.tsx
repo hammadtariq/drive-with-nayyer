@@ -5,7 +5,7 @@ const credentials = [
   "MTO Certified Driving Instructor",
   "G2 and G road test training",
   "Lessons in English, Urdu, and Hindi",
-  "Pickup and drop-off in selected Mississauga areas",
+  "Lessons in Mississauga, Oakville, Burlington, and Milton",
   "Women-only instruction — a safe, comfortable environment",
 ];
 
@@ -20,7 +20,7 @@ export function About() {
               <div className="relative w-full aspect-[7/8] rounded-2xl overflow-hidden">
                 <Image
                   src="/instructor-photo.jpg"
-                  alt="Nayyer Sultana, MTO Certified driving instructor in Mississauga"
+                  alt="Nayyer Sultana, MTO Certified driving instructor serving Mississauga, Oakville, Burlington, and Milton in Ontario, Canada"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 560px"
@@ -47,10 +47,10 @@ export function About() {
               Nayyer Sultana —<br />MTO Certified Instructor
             </h2>
             <p className="mt-5 font-body text-ink/80 leading-relaxed" style={{ fontSize: "1.0625rem" }}>
-              Nayyer Sultana has been helping women gain the confidence and
-              skills to drive safely on Ontario roads. Her lessons are calm,
-              structured, and patient — designed for first-time drivers and
-              experienced drivers preparing for the G test alike.
+              Nayyer Sultana helps women gain the confidence and skills to
+              drive safely on Ontario roads. Her lessons are calm, structured,
+              and patient — designed for first-time drivers and experienced
+              drivers preparing for the G test alike.
             </p>
             <p className="mt-4 font-body text-ink/80 leading-relaxed" style={{ fontSize: "1.0625rem" }}>
               Nayyer's women-only approach creates a space where students feel
@@ -76,7 +76,7 @@ export function About() {
                 href="https://wa.me/16477162153"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-primary-deep text-white font-display font-semibold text-sm hover:bg-primary-light transition-colors duration-200"
+                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-primary-deep text-white font-display font-semibold text-sm hover:bg-primary-deep/80 transition-colors duration-200"
               >
                 <WhatsAppIcon />
                 Message on WhatsApp

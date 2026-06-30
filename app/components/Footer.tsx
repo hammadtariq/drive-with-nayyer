@@ -65,7 +65,7 @@ export function Footer() {
               <a href="mailto:kooolnayyer12@gmail.com" className="hover:text-on-primary transition-colors">
                 kooolnayyer12@gmail.com
               </a>
-              <span>Mississauga, Ontario</span>
+              <span>Ontario, Canada · Mississauga, Oakville, Burlington & Milton</span>
             </div>
           </AnimateIn>
         </div>
@@ -75,7 +75,7 @@ export function Footer() {
       <div className="bg-ink py-5 px-5 sm:px-8">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="font-body text-white/40 text-xs text-center sm:text-left">
-            © {new Date().getFullYear()} Driving With Nayyer · Women-only driving instruction · Mississauga, ON
+            © {new Date().getFullYear()} Drive With Nayyer · Women-only driving instruction in Ontario, Canada
           </p>
           <p className="font-body text-white/25 text-xs">
             MTO Certified Instructor

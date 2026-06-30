@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Modernize the homepage hero and navigation with a raw video background, liquid-glass nav, Inter typography, and business-accurate Driving With Nayyer copy.
+**Goal:** Modernize the homepage hero and navigation with a raw video background, liquid-glass nav, Inter typography, and business-accurate Drive With Nayyer copy.
 
 **Architecture:** Keep `Nav` and `Hero` as small client components because the nav dialog and heading reveal need client-side state. Use Next App Router `next/font/google` in `app/layout.tsx` instead of raw Google `<link>` tags. Put reusable visual primitives, including `.liquid-glass`, in `app/globals.css`.
 
@@ -12,7 +12,7 @@
 
 - Use the supplied video URL as a raw full-viewport background with `autoPlay`, `loop`, `muted`, and `playsInline`.
 - Do not add a dark overlay, gradient overlay, or semi-transparent layer over the video.
-- Adapt the reference structure to Driving With Nayyer, not VEX or investing/advisory language.
+- Adapt the reference structure to Drive With Nayyer, not VEX or investing/advisory language.
 - Use Inter via `next/font/google` because this is a Next.js App Router project.
 - Keep the page dark, with white text and no purple or indigo palette.
 - Preserve existing anchor targets: `#about`, `#packages`, `#how-it-works`, and `#faq`.

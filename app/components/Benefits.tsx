@@ -23,8 +23,8 @@ const supporting = [
         <path d="M11 7v4l2.5 2.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
-    heading: "Pickup & drop-off",
-    body: "No need to arrange a ride to lessons. Nayyer picks you up and drops you home in selected Mississauga areas.",
+    heading: "Clear service area",
+    body: "Nayyer teaches in Ontario, Canada, with lessons available in Mississauga, Oakville, Burlington, and Milton. Message to confirm other nearby areas.",
   },
   {
     icon: (
@@ -43,7 +43,7 @@ const supporting = [
       </svg>
     ),
     heading: "MTO Certified & experienced",
-    body: "Nayyer is a certified Ontario driving instructor with years of experience helping students at every level.",
+    body: "Nayyer is an MTO Certified driving instructor in Ontario, Canada with years of experience helping students at every level.",
   },
 ];
 

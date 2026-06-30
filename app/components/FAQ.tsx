@@ -6,27 +6,27 @@ import { AnimateIn } from "./AnimateIn";
 const faqs = [
   {
     id: "g2-vs-g",
-    question: "Which package should I choose — G2 or G?",
+    question: "Which package should I choose?",
     answer:
-      "If you hold a G1 licence and have not yet taken your G2 road test, start with Package 01 or 02. If you already have your G2 and are preparing for the full G road test, Package 03 is designed for you. Not sure? Message Nayyer on WhatsApp before booking and she will point you in the right direction.",
+      "If you are just starting, choose the BDE Program. If you have your G1 and want practice lessons, choose Hourly Driving Lessons. If your G2 or G road test is already booked, choose Road Test Vehicle. Not sure? Message Nayyer on WhatsApp before booking and she will point you in the right direction.",
   },
   {
     id: "after-first-lesson",
-    question: "What happens after I book and pay for my first lesson?",
+    question: "What happens after I book and pay?",
     answer:
-      "Once payment is confirmed through Stripe, your first lesson slot is locked in. After that lesson, Nayyer will coordinate the remaining lessons in your package directly with you — usually through WhatsApp — based on your availability and progress.",
+      "Once payment is confirmed, your booking is locked in. Nayyer will coordinate lesson details, pickup coverage, and any remaining scheduling directly with you — usually through WhatsApp — based on your availability and progress.",
   },
   {
     id: "pickup-area",
-    question: "Which areas do you cover for pickup and drop-off?",
+    question: "Where does Nayyer offer lessons?",
     answer:
-      "Nayyer offers pickup and drop-off in selected areas of Mississauga. If you are unsure whether your area is covered, message her on WhatsApp with your address before booking. She will confirm availability.",
+      "Nayyer offers lessons in Ontario, Canada, including Mississauga, Oakville, Burlington, and Milton. If you are outside these cities or unsure whether your exact address is covered, message her on WhatsApp before booking. She will confirm availability.",
   },
   {
     id: "own-car",
     question: "Do I need my own car?",
     answer:
-      "No. All in-car lessons are conducted in Nayyer's training vehicle, which is properly equipped and insured for driver training. Packages 02 and 03 also include use of the training car on your road test day.",
+      "No. In-car lessons are conducted in Nayyer's training vehicle, which is properly equipped and insured for driver training. The Road Test Vehicle package includes use of the training car on your G2 or G road test day.",
   },
   {
     id: "policy",

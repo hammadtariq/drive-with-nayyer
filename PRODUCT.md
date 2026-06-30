@@ -6,11 +6,11 @@ brand
 
 ## Users
 
-Women in the Mississauga–GTA area learning to drive for their G2 or G licence. Many are from South Asian backgrounds (English, Urdu, and Hindi spoken). They arrive primarily via Instagram, Facebook, and WhatsApp links — overwhelmingly on mobile. Some are first-time drivers nervous about committing; others are experienced drivers who've been postponing the G test. They need to feel safe and understood before handing money to a stranger.
+Women in Ontario, Canada learning to drive for their G2 or G licence, with lessons available in Mississauga, Oakville, Burlington, and Milton. Many are from South Asian backgrounds (English, Urdu, and Hindi spoken). They arrive primarily via Instagram, Facebook, and WhatsApp links — overwhelmingly on mobile. Some are first-time drivers nervous about committing; others are experienced drivers who've been postponing the G test. They need to feel safe and understood before handing money to a stranger.
 
 ## Product Purpose
 
-Driving With Nayyer is a women-only driving instruction business run by Nayyer Sultana, MTO Certified Instructor, in Mississauga, Ontario. The website's job is to convert social media traffic into paid first-lesson bookings — eliminating the inquiry-and-back-and-forth that costs Nayyer unpaid time holds. Success means a visitor understands the offer, trusts the instructor, selects a package, and completes checkout through Cal.com + Stripe before closing the tab. No accounts, no custom backend — static marketing with external booking.
+Drive With Nayyer is a women-only driving instruction business run by Nayyer Sultana, an MTO Certified Instructor in Ontario, Canada. Lessons are available in Mississauga, Oakville, Burlington, and Milton, with students asked to message before booking if they are outside the listed cities. The website's job is to convert social media traffic into paid first-lesson bookings — eliminating the inquiry-and-back-and-forth that costs Nayyer unpaid time holds. Success means a visitor understands the offer, trusts the instructor, selects a package, and completes checkout through Cal.com + Stripe before closing the tab. No accounts, no custom backend — static marketing with external booking.
 
 ## Brand Personality
 
