@@ -50,7 +50,7 @@ const packages = [
     number: "03",
     name: "Road Test Vehicle",
     tagline: "I have my road test coming up.",
-    price: "$170-$220",
+    price: "$190-$260",
     note: "Terms and conditions apply",
     inclusions: [
       "Use Nayyer's training vehicle for your G2 or G road test",

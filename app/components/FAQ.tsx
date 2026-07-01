@@ -38,7 +38,7 @@ const faqs = [
     id: "contact",
     question: "How do I contact Nayyer directly?",
     answer:
-      "The fastest way to reach Nayyer is WhatsApp at 647-716-2153. You can also call or email kooolnayyer12@gmail.com. Nayyer responds to WhatsApp messages most quickly.",
+      "The fastest way to reach Nayyer is WhatsApp at 647-716-2153. You can also call or email Koolnayyer12@gmail.com. Nayyer responds to WhatsApp messages most quickly.",
   },
 ];
 
