@@ -1,13 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Packages", href: "#packages" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "FAQ", href: "#faq" },
+  { label: "About", href: "/#about" },
+  { label: "Packages", href: "/#packages" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Blog", href: "/blog" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 function MenuIcon() {
@@ -45,9 +47,14 @@ function LogoMark() {
   );
 }
 
-export function Nav() {
+type NavProps = {
+  solid?: boolean;
+};
+
+export function Nav({ solid = false }: NavProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const isSolid = solid || scrolled;
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 80);
@@ -59,70 +66,70 @@ export function Nav() {
     <header className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 md:px-12 lg:px-16 pt-4 sm:pt-6 transition-[padding] duration-300">
       <div
         className={`rounded-xl px-4 py-2.5 flex items-center justify-between gap-6 transition-all duration-300 ${
-          scrolled
+            isSolid
             ? "bg-white/95 backdrop-blur-sm shadow-[0_1px_0_var(--shadow-primary)]"
             : "liquid-glass"
         }`}
       >
 
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3 shrink-0" aria-label="Drive With Nayyer home">
+        <Link href="/" className="flex items-center gap-3 shrink-0" aria-label="Drive With Nayyer home">
           <span className="flex h-10 w-8 items-center justify-center">
             <LogoMark />
           </span>
           <span className="flex flex-col justify-center leading-none">
             <span
               className={`font-body text-[0.58rem] uppercase tracking-[0.38em] transition-colors duration-300 ${
-                scrolled ? "text-ink/45" : "text-white/60"
+                isSolid ? "text-ink/45" : "text-white/60"
               }`}
             >
               Drive With
             </span>
             <span
               className={`mt-1 font-display text-[1.05rem] font-black uppercase tracking-[0.18em] transition-colors duration-300 ${
-                scrolled ? "text-ink" : "text-white"
+                isSolid ? "text-ink" : "text-white"
               }`}
             >
               Nayyer
             </span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop links */}
         <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className={`text-sm font-body font-semibold transition-colors duration-200 ${
-                scrolled
+                isSolid
                   ? "text-ink/70 hover:text-primary-deep"
                   : "text-white/70 hover:text-white"
               }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         {/* Desktop CTA */}
-        <a
-          href="#packages"
+        <Link
+          href="/#packages"
           className={`hidden md:inline-flex items-center px-6 py-2 rounded-lg font-display font-semibold text-sm transition-colors duration-200 ${
-            scrolled
+            isSolid
               ? "bg-accent text-ink hover:bg-accent-deep"
               : "bg-white text-black hover:bg-white/90"
           }`}
         >
           Book a Lesson
-        </a>
+        </Link>
 
         {/* Mobile hamburger */}
         <Dialog.Root open={open} onOpenChange={setOpen}>
           <Dialog.Trigger asChild>
             <button
               className={`md:hidden p-2 -mr-1 rounded-lg transition-colors ${
-                scrolled
+                isSolid
                   ? "text-ink hover:bg-primary-pale"
                   : "text-white hover:bg-white/15"
               }`}
@@ -155,24 +162,24 @@ export function Nav() {
               <nav className="flex flex-col gap-1 p-4 flex-1" aria-label="Mobile navigation">
                 {navLinks.map((link) => (
                   <Dialog.Close asChild key={link.href}>
-                    <a
+                    <Link
                       href={link.href}
                       className="px-4 py-3 rounded-xl font-body font-semibold text-white/80 hover:bg-white/10 hover:text-white transition-colors duration-150"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </Dialog.Close>
                 ))}
               </nav>
 
               <div className="p-5 border-t border-white/10">
                 <Dialog.Close asChild>
-                  <a
-                    href="#packages"
+                  <Link
+                    href="/#packages"
                     className="flex items-center justify-center w-full py-3.5 rounded-lg bg-white text-black font-display font-semibold text-sm hover:bg-white/90 transition-colors"
                   >
                     Book a Lesson
-                  </a>
+                  </Link>
                 </Dialog.Close>
               </div>
             </Dialog.Content>

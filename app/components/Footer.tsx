@@ -1,4 +1,5 @@
 import { AnimateIn } from "./AnimateIn";
+import Link from "next/link";
 
 function WhatsAppIcon() {
   return (
@@ -145,12 +146,12 @@ export function Footer() {
 
           <AnimateIn delay={0.1}>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <a
-                href="#packages"
+              <Link
+                href="/#packages"
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-accent text-ink font-display font-bold text-base hover:bg-accent-deep transition-colors duration-200"
               >
                 See packages & book
-              </a>
+              </Link>
               <a
                 href="https://wa.me/16477162153"
                 target="_blank"
@@ -171,7 +172,7 @@ export function Footer() {
           <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-[1.2fr_1fr_1fr]">
             {/* Brand */}
             <div>
-              <a href="#" className="inline-flex items-center gap-2.5" aria-label="Drive With Nayyer home">
+              <Link href="/" className="inline-flex items-center gap-2.5" aria-label="Drive With Nayyer home">
                 <LogoMark />
                 <span className="flex flex-col justify-center leading-none">
                   <span className="font-body text-[0.55rem] uppercase tracking-[0.35em] text-white/55">
@@ -181,7 +182,7 @@ export function Footer() {
                     Nayyer
                   </span>
                 </span>
-              </a>
+              </Link>
               <p className="mt-5 font-body text-white/75 text-sm leading-relaxed max-w-[26ch]">
                 Women-only driving instruction in Ontario, Canada — MTO Certified.
               </p>

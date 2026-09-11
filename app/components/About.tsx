@@ -53,7 +53,7 @@ export function About() {
               drivers preparing for the G test alike.
             </p>
             <p className="mt-4 font-body text-ink/80 leading-relaxed" style={{ fontSize: "1.0625rem" }}>
-              Nayyer's women-only approach creates a space where students feel
+              Nayyer&apos;s women-only approach creates a space where students feel
               truly comfortable asking questions, making mistakes, and building
               real confidence — not just passing a test.
             </p>
