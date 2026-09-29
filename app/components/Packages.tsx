@@ -1,9 +1,9 @@
 import { AnimateIn } from "./AnimateIn";
 
-// Cal.com booking URLs — replace with real event links once configured
+// Cal.com booking URLs — road test vehicle booking is not configured yet
 const CAL_URLS = {
-  pkg01: "#book-package-01",
-  pkg02: "#book-package-02",
+  pkg01: "https://cal.com/nayyer-khalid-ll9vux/beginner-driver-s-education",
+  pkg02: "https://cal.com/nayyer-khalid-ll9vux/hourly-driving-lessons",
   pkg03: "#book-package-03",
 };
 
@@ -180,6 +180,8 @@ export function Packages() {
                   {/* CTA */}
                   <a
                     href={pkg.href}
+                    target={pkg.href.startsWith("https://") ? "_blank" : undefined}
+                    rel={pkg.href.startsWith("https://") ? "noopener noreferrer" : undefined}
                     className={`block w-full text-center py-3.5 rounded-xl font-display font-semibold text-sm transition-colors duration-200 ${
                       pkg.featured
                         ? "bg-accent text-ink hover:bg-accent-deep"
