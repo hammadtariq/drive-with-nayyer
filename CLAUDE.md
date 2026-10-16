@@ -43,10 +43,10 @@ Next.js 16 (App Router) · React 19 · TypeScript (strict) · Tailwind CSS 4 · 
 
 Project skills live in `.claude/skills/` (from [mattpocock/skills](https://github.com/mattpocock/skills), MIT):
 
-- `/implement` — build a ticket end to end (user-invoked; the developer agents start with it)
+- `/implement` — build a ticket end to end (user-invoked only; the developer agents' workflow prompt spells out its steps)
 - `/tdd` — red → green at pre-agreed seams; only applies once `pnpm test` exists
 - `/diagnosing-bugs` — feedback-loop-first debugging for bug tickets
-- `/code-review` — two-axis review (Standards + Spec); the tech lead uses it
+- `/code-review` — two-axis review (Standards + Spec); the tech lead loads it on every review; it does both axes itself, and uses the skill's two sub-agents only on PRs over 400 changed lines
 
 Standards sources for `/code-review`: this file, `DESIGN.md`, `PRODUCT.md`.
 

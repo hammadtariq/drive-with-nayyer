@@ -83,9 +83,13 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ steps.app-token.outputs.token }}
           prompt: |
-            /implement GitHub issue #${{ env.ISSUE }}. The spec is in .agent/issue.md.
+            Implement GitHub issue #${{ env.ISSUE }}. The spec is in .agent/issue.md.
             You are already on branch ${{ steps.role.outputs.branch }} with dependencies installed.
-            Follow the "Skills" rules in your role (unattended run: no /code-review step, commit only).
+            Work the way the project's `implement` skill describes (.claude/skills/implement/SKILL.md):
+            - If `pnpm test` exists, use the Skill tool to load the `tdd` skill and work test-first at the seams the issue names.
+            - For a bug ticket, use the Skill tool to load the `diagnosing-bugs` skill first.
+            - Type-check regularly with `pnpm exec tsc --noEmit`.
+            - Skip the implement skill's final code-review step (the tech lead reviews separately). Commit only; do not push.
             Before finishing, `pnpm lint` and `pnpm build` must pass (and `pnpm test` if it exists).
             Return status "done" with a conventional-commit PR title and a PR body
             (summary, how you verified, which skills you used, follow-ups),
