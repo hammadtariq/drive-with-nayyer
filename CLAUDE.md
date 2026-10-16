@@ -25,7 +25,8 @@ Next.js 16 (App Router) · React 19 · TypeScript (strict) · Tailwind CSS 4 · 
 - Install: `pnpm install --frozen-lockfile`
 - Lint: `pnpm lint`
 - Build (also type-checks): `pnpm build`
-- There is no test suite. `pnpm lint` and `pnpm build` must both pass.
+- Type-check only: `pnpm exec tsc --noEmit`
+- There is no test suite yet. `pnpm lint` and `pnpm build` must both pass; once `pnpm test` exists, it must pass too.
 
 ## Rules
 
@@ -37,3 +38,22 @@ Next.js 16 (App Router) · React 19 · TypeScript (strict) · Tailwind CSS 4 · 
 - No claims like "guaranteed pass"
 - No new dependencies unless the issue asks; say why in the PR body
 - Never commit `.env*` files or secrets
+
+## Agent skills
+
+Project skills live in `.claude/skills/` (from [mattpocock/skills](https://github.com/mattpocock/skills), MIT):
+
+- `/implement` — build a ticket end to end (user-invoked; the developer agents start with it)
+- `/tdd` — red → green at pre-agreed seams; only applies once `pnpm test` exists
+- `/diagnosing-bugs` — feedback-loop-first debugging for bug tickets
+- `/code-review` — two-axis review (Standards + Spec); the tech lead uses it
+
+Standards sources for `/code-review`: this file, `DESIGN.md`, `PRODUCT.md`.
+
+### Issue tracker
+
+GitHub Issues on `hammadtariq/drive-with-nayyer`. See `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+Single-context: `CONTEXT.md` and `docs/adr/` at the repo root (created when needed). See `docs/agents/domain.md`.

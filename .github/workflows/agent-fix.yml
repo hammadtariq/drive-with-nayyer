@@ -89,13 +89,14 @@ jobs:
           prompt: |
             The tech lead requested changes on PR #${{ env.PR }} (branch ${{ env.BRANCH }}, already checked out).
             The review is in .agent/review.md. Fix every must-fix item; skip optional suggestions unless trivial.
-            Run `pnpm lint` and `pnpm build` until both pass, then commit (do not push).
+            Use /diagnosing-bugs if a comment reports a bug you can't see at once.
+            Run `pnpm lint` and `pnpm build` (and `pnpm test` if it exists) until they pass, then commit (do not push).
             Return status "done" and a short reply listing what you changed per comment,
             or status "blocked" if a comment is wrong or needs a decision from a human, explaining why.
           claude_args: >-
             --agent ${{ steps.prep.outputs.agent }}
             --max-turns 35
-            --allowedTools "Read,Edit,Write,Glob,Grep,Bash(pnpm lint*),Bash(pnpm build*),Bash(git status*),Bash(git diff*),Bash(git add *),Bash(git commit *),Bash(git log*)"
+            --allowedTools "Read,Edit,Write,Glob,Grep,Skill,Bash(pnpm lint*),Bash(pnpm build*),Bash(pnpm test*),Bash(pnpm exec tsc*),Bash(git status*),Bash(git diff*),Bash(git add *),Bash(git commit *),Bash(git log*)"
             --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["done","blocked"]},"reply":{"type":"string"}},"required":["status","reply"]}'
 
       - name: Push fixes and hand back to the tech lead
