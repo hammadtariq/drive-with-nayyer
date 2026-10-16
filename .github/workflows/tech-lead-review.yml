@@ -87,14 +87,14 @@ jobs:
           classify_inline_comments: "false"
           prompt: |
             Review pull request #${{ env.PR }} in ${{ env.REPO }}.
-            First, use the Skill tool to load the `code-review` skill and run it with fixed point `origin/main`.
-            This is required: do not review by hand instead. Then follow your tech-lead role:
+            First, use the Skill tool to load the `code-review` skill and apply it with fixed point `origin/main`.
+            This is required. Do both axes yourself in one pass; do not spawn sub-agents. Then follow your tech-lead role:
             spec = .agent/issue.md, standards = CLAUDE.md, DESIGN.md, PRODUCT.md, CI output = .agent/ci.txt.
             Post inline comments for must-fix findings only, then return your verdict.
           claude_args: >-
             --agent tech-lead
-            --max-turns 30
-            --allowedTools "Read,Glob,Grep,Skill,Agent,Bash(git diff*),Bash(git log*),Bash(git rev-parse*),mcp__github_inline_comment__create_inline_comment"
+            --max-turns 25
+            --allowedTools "Read,Glob,Grep,Skill,Bash(git diff*),Bash(git log*),Bash(git rev-parse*),mcp__github_inline_comment__create_inline_comment"
             --json-schema '{"type":"object","properties":{"verdict":{"type":"string","enum":["approved","changes_requested"]},"summary":{"type":"string"},"optional":{"type":"string"}},"required":["verdict","summary"]}'
 
       - name: Apply verdict

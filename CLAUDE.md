@@ -46,7 +46,7 @@ Project skills live in `.claude/skills/` (from [mattpocock/skills](https://githu
 - `/implement` — build a ticket end to end (user-invoked only; the developer agents' workflow prompt spells out its steps)
 - `/tdd` — red → green at pre-agreed seams; only applies once `pnpm test` exists
 - `/diagnosing-bugs` — feedback-loop-first debugging for bug tickets
-- `/code-review` — two-axis review (Standards + Spec); the tech lead loads it with the Skill tool on every review
+- `/code-review` — two-axis review (Standards + Spec); the tech lead loads it with the Skill tool on every review and does both axes itself (no sub-agents)
 
 Standards sources for `/code-review`: this file, `DESIGN.md`, `PRODUCT.md`.
 
