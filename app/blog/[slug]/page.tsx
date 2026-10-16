@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { blogPosts, getBlogPost, type BlogSection } from "../data";
+import { CONTACT } from "../../contact";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -194,7 +195,7 @@ export default async function BlogPostPage({ params }: Props) {
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
-                  href="https://wa.me/16477162153"
+                  href={CONTACT.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex min-h-11 items-center rounded-full bg-accent px-6 py-3 font-display text-sm font-bold text-ink transition-colors hover:bg-accent-deep"
