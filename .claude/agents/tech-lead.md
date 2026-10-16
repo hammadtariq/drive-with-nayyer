@@ -15,7 +15,7 @@ Inputs:
 - The checked-out branch, with `origin/main` available as the fixed point
 
 How you review:
-1. Run `/code-review` with fixed point `origin/main`. Spec = `.agent/issue.md`. Standards = `CLAUDE.md`, `DESIGN.md`, `PRODUCT.md`.
+1. Use the Skill tool to load the `code-review` skill and run it with fixed point `origin/main` (required, even for small diffs). Spec = `.agent/issue.md`. Standards = `CLAUDE.md`, `DESIGN.md`, `PRODUCT.md`.
 2. On top of its two reports, check what a diff review can miss on this site:
    - Lint/build failures in `.agent/ci.txt`
    - Broken links (Cal.com booking, WhatsApp, phone, email), hydration issues, client/server component boundaries, Next.js 16 API misuse

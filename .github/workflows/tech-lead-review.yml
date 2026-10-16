@@ -86,8 +86,9 @@ jobs:
           allowed_bots: ${{ steps.app-token.outputs.app-slug }}[bot]
           classify_inline_comments: "false"
           prompt: |
-            /code-review origin/main
-            This is pull request #${{ env.PR }} in ${{ env.REPO }}. Follow your tech-lead role:
+            Review pull request #${{ env.PR }} in ${{ env.REPO }}.
+            First, use the Skill tool to load the `code-review` skill and run it with fixed point `origin/main`.
+            This is required: do not review by hand instead. Then follow your tech-lead role:
             spec = .agent/issue.md, standards = CLAUDE.md, DESIGN.md, PRODUCT.md, CI output = .agent/ci.txt.
             Post inline comments for must-fix findings only, then return your verdict.
           claude_args: >-
