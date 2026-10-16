@@ -1,0 +1,118 @@
+# Developer agent, second pass: runs when the tech lead adds `changes-requested`.
+# Max 2 fix rounds (round-1, round-2); after that the tech lead hands the PR to you with `needs-human`.
+name: Agent - address review
+
+on:
+  pull_request:
+    types: [labeled]
+
+concurrency:
+  group: agent-fix-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  fix:
+    if: >-
+      github.event.label.name == 'changes-requested' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      PR: ${{ github.event.pull_request.number }}
+      BRANCH: ${{ github.event.pull_request.head.ref }}
+      REPO: ${{ github.repository }}
+      LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+    steps:
+      - id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.AGENTS_APP_ID }}
+          private-key: ${{ secrets.AGENTS_APP_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Pick role, bump round, write review brief
+        id: prep
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          BOT: ${{ steps.app-token.outputs.app-slug }}[bot]
+        run: |
+          case ",$LABELS," in
+            *,agent:frontend,*)  echo "agent=frontend-engineer"  >> "$GITHUB_OUTPUT" ;;
+            *,agent:fullstack,*) echo "agent=fullstack-engineer" >> "$GITHUB_OUTPUT" ;;
+            *) echo "No agent label on this PR"; exit 1 ;;
+          esac
+          if [[ ",$LABELS," == *",round-1,"* ]]; then ROUND=round-2; else ROUND=round-1; fi
+          gh api "repos/$REPO/issues/$PR/labels" -f "labels[]=$ROUND" >/dev/null
+
+          BOT_ID=$(gh api "/users/$BOT" --jq .id)
+          git config user.name "$BOT"
+          git config user.email "$BOT_ID+$BOT@users.noreply.github.com"
+          echo "base=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+          mkdir -p .agent
+          # Only the tech lead's latest review (written by the agents bot) reaches the agent.
+          SUMMARIES=$(gh api "repos/$REPO/issues/$PR/comments" --paginate --jq "[.[] | select(.user.login == \"$BOT\" and (.body | startswith(\"**Tech lead review**\")))]" | jq -s 'add')
+          SINCE=$(jq -r 'if length > 1 then .[-2].created_at else "1970-01-01T00:00:00Z" end' <<<"$SUMMARIES")
+          {
+            echo "# Tech lead review of PR #$PR"
+            jq -r '.[-1].body // ""' <<<"$SUMMARIES"
+            echo
+            echo "## Inline comments"
+            gh api "repos/$REPO/pulls/$PR/comments" --paginate --jq ".[] | select(.user.login == \"$BOT\" and .created_at > \"$SINCE\") | \"\n- id \(.id) · \(.path):\(.line // .original_line)\n  \(.body)\""
+          } > .agent/review.md
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Run developer agent on the feedback
+        id: agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ steps.app-token.outputs.token }}
+          allowed_bots: ${{ steps.app-token.outputs.app-slug }}[bot]
+          prompt: |
+            The tech lead requested changes on PR #${{ env.PR }} (branch ${{ env.BRANCH }}, already checked out).
+            The review is in .agent/review.md. Fix every must-fix item; skip optional suggestions unless trivial.
+            Run `pnpm lint` and `pnpm build` until both pass, then commit (do not push).
+            Return status "done" and a short reply listing what you changed per comment,
+            or status "blocked" if a comment is wrong or needs a decision from a human, explaining why.
+          claude_args: >-
+            --agent ${{ steps.prep.outputs.agent }}
+            --max-turns 35
+            --allowedTools "Read,Edit,Write,Glob,Grep,Bash(pnpm lint*),Bash(pnpm build*),Bash(git status*),Bash(git diff*),Bash(git add *),Bash(git commit *),Bash(git log*)"
+            --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["done","blocked"]},"reply":{"type":"string"}},"required":["status","reply"]}'
+
+      - name: Push fixes and hand back to the tech lead
+        if: always() && steps.prep.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          BASE: ${{ steps.prep.outputs.base }}
+          RESULT: ${{ steps.agent.outputs.structured_output }}
+        run: |
+          RESULT=${RESULT:-'{}'}
+          STATUS=$(jq -r '.status // "failed"' <<<"$RESULT")
+          { echo "**Agent fix** · status: $STATUS"; echo; jq -r '.reply // "No reply; see the workflow run."' <<<"$RESULT"; } > /tmp/reply.md
+          gh pr comment "$PR" -R "$REPO" --body-file /tmp/reply.md
+          gh api -X DELETE "repos/$REPO/issues/$PR/labels/changes-requested" >/dev/null 2>&1 || true
+          if [ "$STATUS" = "done" ] && [ "$(git rev-parse HEAD)" != "$BASE" ]; then
+            # This push fires `synchronize`, which starts the next tech lead review.
+            git push "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git" "HEAD:refs/heads/$BRANCH"
+          else
+            gh api "repos/$REPO/issues/$PR/labels" -f "labels[]=needs-human" >/dev/null
+          fi

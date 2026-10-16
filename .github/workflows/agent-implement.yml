@@ -1,0 +1,130 @@
+# Developer agent: add `agent:frontend` or `agent:fullstack` to an issue.
+# The agent implements it on its own branch; this workflow pushes and opens the PR.
+name: Agent - implement issue
+
+on:
+  issues:
+    types: [labeled]
+
+concurrency:
+  group: agent-issue-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  implement:
+    if: github.event.label.name == 'agent:frontend' || github.event.label.name == 'agent:fullstack'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      ISSUE: ${{ github.event.issue.number }}
+      LABEL: ${{ github.event.label.name }}
+      REPO: ${{ github.repository }}
+    steps:
+      - id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.AGENTS_APP_ID }}
+          private-key: ${{ secrets.AGENTS_APP_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          persist-credentials: false   # the agent never holds a push token
+
+      - name: Pick role and branch
+        id: role
+        run: |
+          case "$LABEL" in
+            agent:frontend)  echo "agent=frontend-engineer"  >> "$GITHUB_OUTPUT"; echo "branch=fe/issue-$ISSUE" >> "$GITHUB_OUTPUT" ;;
+            agent:fullstack) echo "agent=fullstack-engineer" >> "$GITHUB_OUTPUT"; echo "branch=fs/issue-$ISSUE" >> "$GITHUB_OUTPUT" ;;
+          esac
+
+      - name: Prepare branch, git identity and issue brief
+        id: prep
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          BOT: ${{ steps.app-token.outputs.app-slug }}[bot]
+          BRANCH: ${{ steps.role.outputs.branch }}
+        run: |
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null; then
+            gh issue comment "$ISSUE" -R "$REPO" --body "Branch \`$BRANCH\` already exists. Close its PR and delete the branch, then re-add the label."
+            exit 1
+          fi
+          BOT_ID=$(gh api "/users/$BOT" --jq .id)
+          git config user.name "$BOT"
+          git config user.email "$BOT_ID+$BOT@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          echo "base=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          mkdir -p .agent
+          # Public repo: only the issue body and comments from people with write access reach the agent.
+          {
+            gh issue view "$ISSUE" -R "$REPO" --json title,body --jq '"# #\(env.ISSUE) \(.title)\n\n\(.body)"'
+            gh api "repos/$REPO/issues/$ISSUE/comments" --jq '.[] | select(.author_association == "OWNER" or .author_association == "MEMBER" or .author_association == "COLLABORATOR") | "\n---\nComment by \(.user.login):\n\(.body)"'
+          } > .agent/issue.md
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Run developer agent
+        id: agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          # Keep whichever secret you created in step 1; the other one is simply empty.
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ steps.app-token.outputs.token }}
+          prompt: |
+            Implement GitHub issue #${{ env.ISSUE }}. The issue text is in .agent/issue.md.
+            You are already on branch ${{ steps.role.outputs.branch }} with dependencies installed.
+            1. Implement the acceptance criteria.
+            2. Run `pnpm lint` and `pnpm build`; fix everything until both pass.
+            3. Commit your work (do not push).
+            4. Return status "done" with a conventional-commit PR title and a PR body
+               (summary, how you verified, follow-ups), or status "blocked" with your questions.
+          claude_args: >-
+            --agent ${{ steps.role.outputs.agent }}
+            --max-turns 50
+            --allowedTools "Read,Edit,Write,Glob,Grep,Bash(pnpm lint*),Bash(pnpm build*),Bash(git status*),Bash(git diff*),Bash(git add *),Bash(git commit *),Bash(git log*)"
+            --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["done","blocked"]},"pr_title":{"type":"string"},"pr_body":{"type":"string"},"questions":{"type":"string"}},"required":["status"]}'
+
+      - name: Open PR or report blocker
+        if: always() && steps.prep.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          BRANCH: ${{ steps.role.outputs.branch }}
+          BASE: ${{ steps.prep.outputs.base }}
+          RESULT: ${{ steps.agent.outputs.structured_output }}
+        run: |
+          RESULT=${RESULT:-'{}'}
+          STATUS=$(jq -r '.status // "failed"' <<<"$RESULT")
+          if [ "$STATUS" = "blocked" ]; then
+            jq -r '"The agent needs answers before it can start:\n\n" + (.questions // "")' <<<"$RESULT" > /tmp/body.md
+            echo -e "\n\nAnswer in a comment, then re-add the \`$LABEL\` label." >> /tmp/body.md
+            gh issue comment "$ISSUE" -R "$REPO" --body-file /tmp/body.md
+            gh api "repos/$REPO/issues/$ISSUE/labels" -f "labels[]=blocked" >/dev/null
+            gh api -X DELETE "repos/$REPO/issues/$ISSUE/labels/$(jq -rn --arg l "$LABEL" '$l|@uri')" >/dev/null || true
+            exit 0
+          fi
+          if [ "$STATUS" != "done" ] || [ "$(git rev-parse HEAD)" = "$BASE" ]; then
+            gh issue comment "$ISSUE" -R "$REPO" --body "The agent run failed or made no commits. See the [workflow run]($GITHUB_SERVER_URL/$REPO/actions/runs/$GITHUB_RUN_ID)."
+            gh api "repos/$REPO/issues/$ISSUE/labels" -f "labels[]=needs-human" >/dev/null
+            exit 1
+          fi
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git" "HEAD:refs/heads/$BRANCH"
+          jq -r '.pr_body // ""' <<<"$RESULT" > /tmp/body.md
+          printf '\n\nCloses #%s\n' "$ISSUE" >> /tmp/body.md
+          PR_URL=$(gh pr create -R "$REPO" --base main --head "$BRANCH" --title "$(jq -r '.pr_title' <<<"$RESULT")" --body-file /tmp/body.md)
+          PR=${PR_URL##*/}
+          # Two calls so the needs-review event already sees the agent label.
+          gh api "repos/$REPO/issues/$PR/labels" -f "labels[]=$LABEL" >/dev/null
+          gh api "repos/$REPO/issues/$PR/labels" -f "labels[]=needs-review" >/dev/null
+          gh issue comment "$ISSUE" -R "$REPO" --body "Opened $PR_URL for review."
