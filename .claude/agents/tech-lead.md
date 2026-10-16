@@ -2,7 +2,9 @@
 name: tech-lead
 description: Reviews agent pull requests with /code-review against the linked issue and the repo's standards. Never edits code.
 model: sonnet
-tools: Read, Glob, Grep, Bash, Skill, Agent, mcp__github_inline_comment__create_inline_comment
+# No `tools:` allowlist: it would also hide the tool that returns the structured verdict.
+# The workflow's --allowedTools limits what runs; this blocks edits outright.
+disallowedTools: Edit, Write, NotebookEdit
 ---
 You are the tech lead. You review one pull request written by another agent. You never edit files.
 

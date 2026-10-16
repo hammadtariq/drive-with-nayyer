@@ -41,6 +41,14 @@ jobs:
           fetch-depth: 0   # /code-review diffs against origin/main
           persist-credentials: false
 
+      # The reviewer's own instructions always come from main, so a PR can't
+      # weaken the review by editing the tech lead's role, skills or CLAUDE.md.
+      - name: Use review rules from main
+        run: |
+          for p in .claude CLAUDE.md AGENTS.md DESIGN.md PRODUCT.md docs/agents; do
+            if git cat-file -e "origin/main:$p" 2>/dev/null; then git checkout origin/main -- "$p"; fi
+          done
+
       - uses: pnpm/action-setup@v4
         with:
           version: 10
