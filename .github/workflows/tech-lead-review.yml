@@ -1,0 +1,125 @@
+# Tech lead agent: reviews agent PRs when `needs-review` is added and on every new push.
+# The agent only reads and comments; this workflow applies the verdict labels.
+name: Tech lead - review
+
+on:
+  pull_request:
+    types: [labeled, synchronize]
+
+concurrency:
+  group: lead-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  review:
+    if: >-
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      !github.event.pull_request.draft &&
+      !contains(join(github.event.pull_request.labels.*.name, ','), 'needs-human') &&
+      ((github.event.action == 'labeled' && github.event.label.name == 'needs-review') ||
+       (github.event.action == 'synchronize' && contains(join(github.event.pull_request.labels.*.name, ','), 'agent:')))
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      PR: ${{ github.event.pull_request.number }}
+      HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      REPO: ${{ github.repository }}
+      LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+    steps:
+      - id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.AGENTS_APP_ID }}
+          private-key: ${{ secrets.AGENTS_APP_PRIVATE_KEY }}
+
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Prepare review brief (issue, diff, lint/build)
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          mkdir -p .agent
+          ISSUE=$(sed -n 's#^.*/issue-\([0-9][0-9]*\)$#\1#p' <<<"$HEAD_REF")
+          if [ -n "$ISSUE" ]; then
+            {
+              gh issue view "$ISSUE" -R "$REPO" --json title,body --jq '"# #'"$ISSUE"' \(.title)\n\n\(.body)"'
+              gh api "repos/$REPO/issues/$ISSUE/comments" --jq '.[] | select(.author_association == "OWNER" or .author_association == "MEMBER" or .author_association == "COLLABORATOR") | "\n---\nComment by \(.user.login):\n\(.body)"'
+            } > .agent/issue.md
+          else
+            gh pr view "$PR" -R "$REPO" --json title,body --jq '"# PR: \(.title)\n\n\(.body)"' > .agent/issue.md
+          fi
+          gh pr diff "$PR" -R "$REPO" > .agent/diff.patch
+          pnpm install --frozen-lockfile > /dev/null
+          { echo "## pnpm lint"; pnpm lint 2>&1 | tail -60; echo "exit: ${PIPESTATUS[0]}";
+            echo "## pnpm build"; pnpm build 2>&1 | tail -80; echo "exit: ${PIPESTATUS[0]}"; } > .agent/ci.txt || true
+
+      - name: Run tech lead agent
+        id: lead
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ steps.app-token.outputs.token }}
+          allowed_bots: ${{ steps.app-token.outputs.app-slug }}[bot]
+          classify_inline_comments: "false"
+          prompt: |
+            Review pull request #${{ env.PR }} in ${{ env.REPO }}.
+            Read .agent/issue.md, .agent/diff.patch and .agent/ci.txt, and open changed files only where the diff is not enough.
+            Post inline comments for must-fix problems, then return your verdict.
+          claude_args: >-
+            --agent tech-lead
+            --max-turns 25
+            --allowedTools "Read,Glob,Grep,mcp__github_inline_comment__create_inline_comment"
+            --json-schema '{"type":"object","properties":{"verdict":{"type":"string","enum":["approved","changes_requested"]},"summary":{"type":"string"},"optional":{"type":"string"}},"required":["verdict","summary"]}'
+
+      - name: Apply verdict
+        if: steps.lead.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          RESULT: ${{ steps.lead.outputs.structured_output }}
+        run: |
+          RESULT=${RESULT:-'{}'}
+          VERDICT=$(jq -r '.verdict // "missing"' <<<"$RESULT")
+          label_add() { gh api "repos/$REPO/issues/$PR/labels" -f "labels[]=$1" >/dev/null; }
+          label_rm()  { gh api -X DELETE "repos/$REPO/issues/$PR/labels/$1" >/dev/null 2>&1 || true; }
+
+          case "$VERDICT" in
+            approved)          HEADLINE="VERDICT: APPROVED" ;;
+            changes_requested) HEADLINE="VERDICT: CHANGES REQUESTED" ;;
+            *)                 HEADLINE="VERDICT: NO RESULT (see workflow run)" ;;
+          esac
+          {
+            echo "**Tech lead review** · $HEADLINE"
+            echo
+            jq -r '.summary // ""' <<<"$RESULT"
+            OPT=$(jq -r '.optional // ""' <<<"$RESULT")
+            [ -n "$OPT" ] && printf '\n<details><summary>Optional suggestions</summary>\n\n%s\n</details>\n' "$OPT"
+          } > /tmp/review.md
+          gh pr comment "$PR" -R "$REPO" --body-file /tmp/review.md
+
+          if [ "$VERDICT" = "approved" ]; then
+            label_rm needs-review
+            label_add lead-approved
+          elif [ "$VERDICT" = "changes_requested" ] && [[ ",$LABELS," != *",round-2,"* ]]; then
+            label_rm lead-approved
+            label_rm changes-requested
+            label_add changes-requested
+          else
+            label_rm lead-approved
+            label_add needs-human
+          fi
