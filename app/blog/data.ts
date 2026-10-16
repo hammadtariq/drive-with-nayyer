@@ -1,3 +1,5 @@
+import { CONTACT } from "../contact";
+
 export type BlogSection =
   | {
       type: "paragraph";
@@ -517,7 +519,7 @@ export const blogPosts: BlogPost[] = [
       { question: "Does Nayyer teach in all four cities?", answer: "Yes. Lessons are available in Mississauga, Oakville, Burlington, and Milton." },
       { question: "What if I live near one of these cities?", answer: "Message Nayyer before booking. She can confirm whether your address is covered." },
       { question: "Which package should I choose?", answer: "Choose BDE if you are starting fresh, hourly lessons if you need practice, and Road Test Vehicle if your test is already booked." },
-      { question: "How do I contact Nayyer?", answer: "The fastest way is WhatsApp at 647-716-2153." },
+      { question: "How do I contact Nayyer?", answer: `The fastest way is WhatsApp at ${CONTACT.phoneDisplay}.` },
     ],
     cta: "Looking for women-only driving lessons in Mississauga, Oakville, Burlington, or Milton?",
   },

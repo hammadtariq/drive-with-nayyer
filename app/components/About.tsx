@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { AnimateIn } from "./AnimateIn";
+import { CONTACT } from "../contact";
 
 const credentials = [
   "MTO Certified Driving Instructor",
@@ -73,7 +74,7 @@ export function About() {
 
             <div className="mt-10 flex flex-wrap gap-3">
               <a
-                href="https://wa.me/16477162153"
+                href={CONTACT.whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-primary-deep text-white font-display font-semibold text-sm hover:bg-primary-deep/80 transition-colors duration-200"
@@ -82,11 +83,11 @@ export function About() {
                 Message on WhatsApp
               </a>
               <a
-                href="tel:+16477162153"
+                href={CONTACT.phoneHref}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary/25 text-primary-deep font-display font-semibold text-sm hover:bg-primary-pale transition-colors duration-200"
               >
                 <PhoneIcon />
-                647-716-2153
+                {CONTACT.phoneDisplay}
               </a>
             </div>
           </AnimateIn>

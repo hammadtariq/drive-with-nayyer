@@ -1,5 +1,6 @@
 import { AnimateIn } from "./AnimateIn";
 import Link from "next/link";
+import { CONTACT } from "../contact";
 
 function WhatsAppIcon() {
   return (
@@ -118,9 +119,9 @@ function GoogleIcon() {
 }
 
 const socialLinks = [
-  { href: "https://www.instagram.com/drivewnayyyyer/", label: "Instagram", Icon: InstagramIcon },
+  { href: CONTACT.instagramHref, label: "Instagram", Icon: InstagramIcon },
   {
-    href: "https://www.facebook.com/profile.php?id=61579570078643&mibextid=wwXIfr&rdid=Y8f01fowpoiiEpDY&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1EJsFxSewg%2F%3Fmibextid%3DwwXIfr#",
+    href: CONTACT.facebookHref,
     label: "Facebook",
     Icon: FacebookIcon,
   },
@@ -153,7 +154,7 @@ export function Footer() {
                 See packages & book
               </Link>
               <a
-                href="https://wa.me/16477162153"
+                href={CONTACT.whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full border border-on-primary/25 text-on-primary font-display font-semibold text-base hover:bg-white/60 transition-colors duration-200"
@@ -210,20 +211,20 @@ export function Footer() {
               <ul className="flex flex-col gap-3">
                 <li>
                   <a
-                    href="tel:+16477162153"
+                    href={CONTACT.phoneHref}
                     className="inline-flex items-center gap-2.5 font-body text-white/75 hover:text-white text-sm transition-colors"
                   >
                     <PhoneIcon />
-                    647-716-2153
+                    {CONTACT.phoneDisplay}
                   </a>
                 </li>
                 <li>
                   <a
-                    href="mailto:Koolnayyer12@gmail.com"
+                    href={CONTACT.emailHref}
                     className="inline-flex items-center gap-2.5 font-body text-white/75 hover:text-white text-sm transition-colors"
                   >
                     <MailIcon />
-                    Koolnayyer12@gmail.com
+                    {CONTACT.emailDisplay}
                   </a>
                 </li>
                 <li className="inline-flex items-start gap-2.5 font-body text-white/75 text-sm">

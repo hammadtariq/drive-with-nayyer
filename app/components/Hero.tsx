@@ -4,6 +4,7 @@ import { useRef, useEffect } from "react";
 import { useReducedMotion } from "motion/react";
 import { AnimatedHeading } from "./AnimatedHeading";
 import { FadeIn } from "./FadeIn";
+import { CONTACT } from "../contact";
 
 export function Hero() {
   const shouldReduce = useReducedMotion();
@@ -94,7 +95,7 @@ export function Hero() {
                 </svg>
               </a>
               <a
-                href="https://wa.me/16477162153"
+                href={CONTACT.whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="liquid-glass inline-flex items-center gap-2.5 border border-white/25 text-white px-7 py-3.5 rounded-full font-display font-semibold text-sm hover:bg-white/15 transition-colors duration-200"
