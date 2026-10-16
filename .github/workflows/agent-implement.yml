@@ -83,17 +83,17 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ steps.app-token.outputs.token }}
           prompt: |
-            Implement GitHub issue #${{ env.ISSUE }}. The issue text is in .agent/issue.md.
+            /implement GitHub issue #${{ env.ISSUE }}. The spec is in .agent/issue.md.
             You are already on branch ${{ steps.role.outputs.branch }} with dependencies installed.
-            1. Implement the acceptance criteria.
-            2. Run `pnpm lint` and `pnpm build`; fix everything until both pass.
-            3. Commit your work (do not push).
-            4. Return status "done" with a conventional-commit PR title and a PR body
-               (summary, how you verified, follow-ups), or status "blocked" with your questions.
+            Follow the "Skills" rules in your role (unattended run: no /code-review step, commit only).
+            Before finishing, `pnpm lint` and `pnpm build` must pass (and `pnpm test` if it exists).
+            Return status "done" with a conventional-commit PR title and a PR body
+            (summary, how you verified, which skills you used, follow-ups),
+            or status "blocked" with your questions.
           claude_args: >-
             --agent ${{ steps.role.outputs.agent }}
             --max-turns 50
-            --allowedTools "Read,Edit,Write,Glob,Grep,Bash(pnpm lint*),Bash(pnpm build*),Bash(git status*),Bash(git diff*),Bash(git add *),Bash(git commit *),Bash(git log*)"
+            --allowedTools "Read,Edit,Write,Glob,Grep,Skill,Bash(pnpm lint*),Bash(pnpm build*),Bash(pnpm test*),Bash(pnpm exec tsc*),Bash(git status*),Bash(git diff*),Bash(git add *),Bash(git commit *),Bash(git log*)"
             --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["done","blocked"]},"pr_title":{"type":"string"},"pr_body":{"type":"string"},"questions":{"type":"string"}},"required":["status"]}'
 
       - name: Open PR or report blocker

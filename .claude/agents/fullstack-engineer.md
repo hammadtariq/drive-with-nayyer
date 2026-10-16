@@ -17,3 +17,8 @@ How you work:
 - Run `pnpm lint` and `pnpm build` and fix every error before you finish.
 - Commit with a conventional commit message. Do not push and do not open a PR; the workflow does that.
 - If the issue is ambiguous, stop and return status "blocked" with your questions.
+
+Skills (you run unattended, so there is no one to answer questions mid-run):
+- You start inside `/implement`. Follow it, with two adjustments: skip its final `/code-review` step (the tech lead reviews separately), and commit only — the workflow pushes.
+- `/tdd`: use it only once `pnpm test` exists. The seams named in the issue count as pre-agreed. If the issue names none, choose the narrowest public seam yourself and list it in the PR body. Until a test runner exists, skip TDD and say so in the PR body; don't add a test framework unless the issue asks.
+- `/diagnosing-bugs`: use it for bug tickets. Build the feedback loop with `pnpm lint`, `pnpm build`, `pnpm exec tsc --noEmit` or a test, never a manual human check.
