@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { AnimateIn } from "./AnimateIn";
-import { CONTACT } from "../contact";
+import { CONTACT } from "../lib/contact";
 
 const credentials = [
   "MTO Certified Driving Instructor",

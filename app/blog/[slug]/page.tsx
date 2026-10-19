@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { blogPosts, getBlogPost, type BlogSection } from "../data";
-import { CONTACT } from "../../contact";
+import { CONTACT } from "../../lib/contact";
 
 type Props = {
   params: Promise<{ slug: string }>;
