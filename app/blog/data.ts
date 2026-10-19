@@ -1,4 +1,4 @@
-import { CONTACT } from "../contact";
+import { CONTACT } from "../lib/contact";
 
 export type BlogSection =
   | {

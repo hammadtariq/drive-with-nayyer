@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 import { useReducedMotion } from "motion/react";
 import { AnimatedHeading } from "./AnimatedHeading";
 import { FadeIn } from "./FadeIn";
-import { CONTACT } from "../contact";
+import { CONTACT } from "../lib/contact";
 
 export function Hero() {
   const shouldReduce = useReducedMotion();

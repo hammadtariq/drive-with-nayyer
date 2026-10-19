@@ -1,6 +1,6 @@
 import { AnimateIn } from "./AnimateIn";
 import Link from "next/link";
-import { CONTACT } from "../contact";
+import { CONTACT } from "../lib/contact";
 
 function WhatsAppIcon() {
   return (

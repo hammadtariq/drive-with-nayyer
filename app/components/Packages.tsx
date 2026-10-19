@@ -1,5 +1,5 @@
 import { AnimateIn } from "./AnimateIn";
-import { CONTACT } from "../contact";
+import { CONTACT } from "../lib/contact";
 
 // Cal.com booking URLs — road test vehicle booking is not configured yet
 const CAL_URLS = {

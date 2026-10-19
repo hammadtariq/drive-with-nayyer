@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { blogPosts } from "./data";
-import { CONTACT } from "../contact";
+import { CONTACT } from "../lib/contact";
 
 export const metadata: Metadata = {
   title: "Driving Lesson Guides for Ontario Learners | Drive With Nayyer",
