@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { blogPosts } from "./data";
+import { CONTACT } from "../contact";
 
 export const metadata: Metadata = {
   title: "Driving Lesson Guides for Ontario Learners | Drive With Nayyer",
@@ -34,7 +35,7 @@ export default function BlogIndexPage() {
                 See packages
               </Link>
               <a
-                href="https://wa.me/16477162153"
+                href={CONTACT.whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex min-h-11 items-center rounded-full border border-primary/25 px-6 py-3 font-display text-sm font-semibold text-primary-deep transition-colors hover:bg-primary-pale"

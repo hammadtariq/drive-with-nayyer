@@ -2,6 +2,7 @@
 
 import * as Accordion from "@radix-ui/react-accordion";
 import { AnimateIn } from "./AnimateIn";
+import { CONTACT } from "../contact";
 
 const faqs = [
   {
@@ -38,7 +39,7 @@ const faqs = [
     id: "contact",
     question: "How do I contact Nayyer directly?",
     answer:
-      "The fastest way to reach Nayyer is WhatsApp at 647-716-2153. You can also call or email Koolnayyer12@gmail.com. Nayyer responds to WhatsApp messages most quickly.",
+      `The fastest way to reach Nayyer is WhatsApp at ${CONTACT.phoneDisplay}. You can also call or email ${CONTACT.emailDisplay}. Nayyer responds to WhatsApp messages most quickly.`,
   },
 ];
 
@@ -104,7 +105,7 @@ export function FAQ() {
           <p className="mt-8 text-center font-body text-muted text-sm">
             Still have a question?{" "}
             <a
-              href="https://wa.me/16477162153"
+              href={CONTACT.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary-deep font-semibold hover:underline"

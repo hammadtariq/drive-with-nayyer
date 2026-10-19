@@ -1,4 +1,5 @@
 import { AnimateIn } from "./AnimateIn";
+import { CONTACT } from "../contact";
 
 // Cal.com booking URLs — road test vehicle booking is not configured yet
 const CAL_URLS = {
@@ -200,7 +201,7 @@ export function Packages() {
           <p className="mt-8 text-center font-body text-muted text-sm">
             Not sure which package is right for you?{" "}
             <a
-              href="https://wa.me/16477162153"
+              href={CONTACT.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary-deep font-semibold hover:underline"
