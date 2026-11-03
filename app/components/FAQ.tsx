@@ -2,7 +2,7 @@
 
 import * as Accordion from "@radix-ui/react-accordion";
 import { AnimateIn } from "./AnimateIn";
-import { CONTACT } from "../contact";
+import { CONTACT } from "../lib/contact";
 
 const faqs = [
   {
